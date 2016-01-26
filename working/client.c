@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
     init *read_mssg = (init*)malloc(sizeof(init));
     printf( "bout to read\n");
     int x = read(sockfd, read_mssg, sizeof(init));
-    printf( "i read\n");
+    //printf( "i read\n");
     if (x < 0) {
       perror("ERROR reading mssg ");
       printf("error: %s \n", strerror(errno));
@@ -209,7 +209,7 @@ int main(int argc, char *argv[]) {
               printf("error: %s \n", strerror(errno));
               exit(1);
             }
-      	    exit(0);
+      	    exit(1);
       	  }
       	  printf("Successfully placed card!\n");
       	  // Reverse cards SEG FAULT
