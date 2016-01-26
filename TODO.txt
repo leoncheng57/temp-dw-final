@@ -1,0 +1,6 @@
+TO DO 
+
+implement action cards (draw 2, wild, reverse, skip, wild draw 4)
+
+when player's card count (num_cards) reaches 0, they win
+

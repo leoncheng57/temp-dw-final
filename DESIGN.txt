@@ -1,0 +1,61 @@
+DW APPROVED
+
+Uno Card Game
+
+Andy Tso, Eric He, and Leon Cheng
+Period 8
+
+
+PROJECT DESCRIPTION:
+We aim to recreate the card game Uno, mainly working in the terminal. There can be as many players as desired (multiplayer). The objective of the game is to discard all your cards by playing them. We plan to have the server on one computer and the players on computers of their own. The server will deal the hands to the players while whatever card a player plays will be sent to the server which in turn will be sent to all the other players.
+Some simple rules:
+   1. If the previous card is a number card, your card may either be the same color or value. You may also choose to draw a card.
+   2. If the previous card is an action card (ie Draw 2, Wild Card, Wild Draw 4, Skip, Reverse), then we will check for combos and apply the correct action
+   3. When a player has one card left, he/she must type "uno" first or draw 2 cards.
+   4. First player to discard all cards wins.
+
+HOW TO USE:
+A description as to how the project will be used (describe the user interface).
+Once user can create the game. Others can join the game. Cards will be displayed with ASCII characters. Example:
+  -----
+  |   |
+  | 4 |
+  |   |
+  -----
+Colors in Uno will either be displayed by a distinctive ASCII pattern or a letter corresponding to the color.
+
+The server will be created when the first user creates the game. It will follow the same pattern as fserver. Two programs will be made where one will be initiated by the server while the other program is to be initiated by the other joining players.
+
+CONCEPTS USED:
+How you will be using the topics covered in class in the project.
+Allocating memory.
+
+Working with files.
+Signals (for quitting the game)
+Pipes (named and unnamed for the server).
+Semaphores (let only one player play a card at a time).
+Networking (multiplayer game, to connect between multiple computers).
+
+DISTRIBUTION OF TASKS:
+How you are breaking down the project and who is responsible for which parts.
+*TBA*
+
+DATA STRUCTURES USED:
+What data structures you will be using and how.
+Stack (for storing played cards; need to know the last card played)
+Queues (for storing order of players)
+
+ALGORITHMS USED:
+What algorithms you will be using, and how.
+*TBA*
+
+ADDITIONAL IDEAS (TIME-ALLOWING):
+Add chat server
+Use GTK or SDL to add graphical interface
+
+TIMELINE:
+A timeline with expected completion dates of parts of the project.
+1/8/16 - Approval for DESIGN
+Week 1: Server and basic client
+Week 2: Basic Game Rules, Action Cards, First to say "uno" feature
+Week 3: Additional Features
