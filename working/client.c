@@ -112,6 +112,11 @@ int main(int argc, char *argv[]) {
         p.cards[p.num_cards] = draw_card();
         p.num_cards++;
       }
+      printf("p.num_cards: %d\n", p.num_cards);
+      for ( i = 0; i < p.num_cards; i++ ) {
+        //if ( p.cards[i].color == 0 )
+        printf("%d - play %s %s\n", i, stringify_color(p.cards[i]), stringify_value(p.cards[i]));
+      }
     }
     else 
       printf( "Current card played: [COLOR] %s [VALUE] %d\n", color, read_mssg->top_card.value);
@@ -143,7 +148,6 @@ int main(int argc, char *argv[]) {
       char * scard1;
       char * scard2;
       int num = atoi(buffer);
-      
       //printf( "debugging\n");
       if (num>=p.num_cards){
         printf( "Draw a card!\n");
@@ -166,9 +170,10 @@ int main(int argc, char *argv[]) {
         }
       }
       else{
+        printf("debug\n");
       	card c = p.cards[num];
       	card *write_card;
-      	*write_card = p.cards[num];
+      	*write_card = c;
       	int value = c.value;
       	int color = c.color;
       	char svalue[100];
@@ -192,6 +197,35 @@ int main(int argc, char *argv[]) {
       	    exit(0);
       	  }
       	  printf("Successfully placed card!\n");
+      	  /* WILD CARD ERRORS SEG FAULT
+      	  if ( value == 13 || value == 14 ) {
+      	    printf( "What color do you want?\n");
+      	    printf( "red blue green yellow\n");
+      	    char user_color_input[256];
+      	    printf("debug\n");
+      	    fgets(user_color_input, 255, stdin);
+      	    char *deref = &user_color_input[0];
+      	    if ( strcmp(deref, "red") ) {
+      	      write_card->color = 0;
+      	      write_card->value = value;
+      	    }
+      	    else if ( strcmp(deref, "blue") ) {
+      	      write_card->color = 1;
+      	      write_card->value = value;
+      	    }
+      	    else if ( strcmp(deref, "green") ) {
+      	      write_card->color = 2;
+      	      write_card->value = value;
+      	    }
+      	    else {
+      	      write_card->color = 3;
+      	      write_card->value = value;
+      	    }
+      	  }
+      	  else {
+      	    write_card->color = color;
+	          write_card->value = value;
+      	  } */
       	  write_card->color = color;
 	        write_card->value = value;
 	        int z = write(sockfd, write_card, sizeof(card) );
