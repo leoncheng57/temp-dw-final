@@ -89,7 +89,10 @@ int main(int argc, char *argv[]) {
       exit(1);
     }
     char *color = stringify_color( read_mssg->top_card );
-    printf( "Current card played: [COLOR] %s [VALUE] %d\n", color, read_mssg->top_card.value);
+    if ( read_mssg->top_card.value != 20 )
+      printf( "Current card played: [COLOR] %s [VALUE] %d\n", color, read_mssg->top_card.value);
+    else 
+      printf( "Current card played: [COLOR] %s [VALUE] any value\n", color);
     //printf ( "debug\n" );
     /*printf("able to get pass four\n");
     if (a < 0) {
@@ -120,7 +123,8 @@ int main(int argc, char *argv[]) {
       int num = atoi(buffer);
       
       //printf( "debugging\n");
-      if (num==p.num_cards){
+      if (num>=p.num_cards){
+        printf( "Draw a card!\n");
         card *write_card = (card*)malloc(sizeof(card));
         //printf( "debugging\n");
 	      p.cards[p.num_cards] = draw_card();
