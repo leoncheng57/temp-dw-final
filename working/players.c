@@ -65,7 +65,10 @@ card draw_card() {
   close(fd1);
 
   num = abs(num);
-  new_card.value = num % 15; 
+  new_card.value = num % 15;
+  if (new_card.value == 11){
+    new_card.value = 1;
+  }
   if ( new_card.value == 14) {
     new_card.color = 20;
   }
@@ -86,15 +89,15 @@ void update_top_card( card c ) {
 char *stringify_color(card c) { // NOT SURE IF STRING SYNTAX CORRECT HERE
   char *color;
   if (c.color == 0) 
-    color = "red";
+    color = "Red";
   else if (c.color == 1) 
-    color = "blue";
+    color = "Blue";
   else if (c.color == 2) 
-    color = "green";
+    color = "Green";
   else if (c.color == 3)
-    color = "yellow";
+    color = "Yellow";
   else 
-    color = "any color";
+    color = "Any color";
   return color;
 }
 

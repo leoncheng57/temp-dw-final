@@ -15,7 +15,7 @@ player p;
 
 static void sighandler(int signo) {
   if (signo == SIGINT) {
-    printf("ctrl-c was pressed\n");
+    printf("Ctrl-C was pressed\n");
     exit(0);
   }
 }
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     //printf("four (r)\n");
     //int a = read(sockfd, buffer2, 255 );
     init *read_mssg = (init*)malloc(sizeof(init));
-    printf( "bout to read\n");
+    //printf( "bout to read\n");
     int x = read(sockfd, read_mssg, sizeof(init));
     //printf( "i read\n");
     if (x < 0) {
@@ -91,15 +91,15 @@ int main(int argc, char *argv[]) {
     }
     char *color = stringify_color( read_mssg->top_card );
     if ( read_mssg->top_card.value == 20 )
-      printf( "Current card played: [COLOR] %s [VALUE] any value\n", color);
+      printf( "Current card played: %s Any value\n", color);
     else if ( read_mssg->top_card.value == 10)
-      printf( "Current card played: [COLOR] %s [VALUE] skip\n", color);
+      printf( "Current card played: %s Skip\n", color);
     else if ( read_mssg->top_card.value == 11 ) {
-      printf( "Current card played: [COLOR] %s [VALUE] reverse\n", color);
+      printf( "Current card played: %s Reverse\n", color);
       //read_mssg->top_card.reverse = evod;
     }
     else if ( read_mssg->top_card.value == 12 ) {
-      printf( "Current card played: [COLOR] %s [VALUE] draw 2\n", color);
+      printf( "Current card played: %s Draw 2\n", color);
       printf("A player has made you draw 2!\n"); 
       int i=0;
       for (i; i<2; i++) {
@@ -113,9 +113,9 @@ int main(int argc, char *argv[]) {
       }
     }
     else if ( read_mssg->top_card.value == 13 ) 
-      printf( "Current card played: [COLOR] %s [VALUE] wildcard\n", color);
+      printf( "Last card played: %s Wild Card\n", color);
     else if ( read_mssg->top_card.value == 14 ) {
-      printf( "Current card played: [COLOR] %s [VALUE] wildcard draw 4\n", color);
+      printf( "Last card played: %s Wild Card Draw 4\n", color);
       printf("A player has made you draw 4!\n"); 
       int i=0;
       for (i; i<4; i++) {
@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
       */ 
     }
     else 
-      printf( "Current card played: [COLOR] %s [VALUE] %d\n", color, read_mssg->top_card.value);
+      printf( "Last card played: %s %d\n", color, read_mssg->top_card.value);
     //printf ( "debug\n" );
     /*printf("able to get pass four\n");
     if (a < 0) {
@@ -171,8 +171,8 @@ int main(int argc, char *argv[]) {
 	      //printf( "debugging\n");
 	      p.num_cards++;
 	      //printf( "debugging\n");
-	      scard1 = "draw";
-	      scard2 = "draw";
+	      scard1 = "Draw";
+	      scard2 = "Draw";
 	      // SENDING CARD PLAYED BY PLAYER
 	      write_card->color = 21;
 	      write_card->value = 21;
@@ -184,11 +184,11 @@ int main(int argc, char *argv[]) {
         }
       }
       else{
-        printf("debug\n");
+        //printf("debug\n");
       	card c = p.cards[num];
       	card *write_card;
       	*write_card = c;
-      	printf( "debug\n" );
+      	//printf( "debug\n" );
       	int value = c.value;
       	int color = c.color;
       	char svalue[100];
