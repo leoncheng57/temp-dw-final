@@ -9,6 +9,7 @@
     $ ./server
 2. Then choose the number of players
 3. Another player joins the game on a separate computer using the command
+
     ```
     $ ./client <IP address of computer hosting server> 5001
     ```    
