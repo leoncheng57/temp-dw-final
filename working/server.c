@@ -83,7 +83,17 @@ void incre_pos() {
   
   /* Change the int in the shared memory */
   if ( array[0] < desired_total + 3  )
-    array[0] = array[0] + 1;  
+    // 10 is the value for skip so this code below skips
+    if ( array[2] == 10) {
+      array[0] = array[0] + 1;
+      if ( array[0] < desired_total + 3 )
+        array[0] = array[0] + 1;
+      else
+        array[0] = 4;
+    }
+    // otherwise don't skip
+    else 
+      array[0] = array[0] + 1;  
   else 
     array[0] = 4;
   

@@ -91,6 +91,8 @@ int main(int argc, char *argv[]) {
     char *color = stringify_color( read_mssg->top_card );
     if ( read_mssg->top_card.value == 20 )
       printf( "Current card played: [COLOR] %s [VALUE] any value\n", color);
+    else if ( read_mssg->top_card.value == 10)
+      printf( "Current card played: [COLOR] %s [VALUE] skip\n", color);
     else if ( read_mssg->top_card.value == 11 )
       printf( "Current card played: [COLOR] %s [VALUE] reverse\n", color);
     else if ( read_mssg->top_card.value == 12 ) {
