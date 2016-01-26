@@ -101,6 +101,11 @@ int main(int argc, char *argv[]) {
         p.cards[p.num_cards] = draw_card();
         p.num_cards++;
       }
+      printf("p.num_cards: %d\n", p.num_cards);
+      for ( i = 0; i < p.num_cards; i++ ) {
+        //if ( p.cards[i].color == 0 )
+        printf("%d - play %s %s\n", i, stringify_color(p.cards[i]), stringify_value(p.cards[i]));
+      }
     }
     else if ( read_mssg->top_card.value == 13 ) 
       printf( "Current card played: [COLOR] %s [VALUE] wildcard\n", color);
