@@ -93,12 +93,26 @@ int main(int argc, char *argv[]) {
       printf( "Current card played: [COLOR] %s [VALUE] any value\n", color);
     else if ( read_mssg->top_card.value == 11 )
       printf( "Current card played: [COLOR] %s [VALUE] reverse\n", color);
-    else if ( read_mssg->top_card.value == 12 )
+    else if ( read_mssg->top_card.value == 12 ) {
       printf( "Current card played: [COLOR] %s [VALUE] draw 2\n", color);
-    else if ( read_mssg->top_card.value == 13 )
+      printf("A player has made you draw 2!\n"); 
+      int i=0;
+      for (i; i<2; i++) {
+        p.cards[p.num_cards] = draw_card();
+        p.num_cards++;
+      }
+    }
+    else if ( read_mssg->top_card.value == 13 ) 
       printf( "Current card played: [COLOR] %s [VALUE] wildcard\n", color);
-    else if ( read_mssg->top_card.value == 14 )
+    else if ( read_mssg->top_card.value == 14 ) {
       printf( "Current card played: [COLOR] %s [VALUE] wildcard draw 4\n", color);
+      printf("A player has made you draw 4!\n"); 
+      int i=0;
+      for (i; i<4; i++) {
+        p.cards[p.num_cards] = draw_card();
+        p.num_cards++;
+      }
+    }
     else 
       printf( "Current card played: [COLOR] %s [VALUE] %d\n", color, read_mssg->top_card.value);
     //printf ( "debug\n" );
