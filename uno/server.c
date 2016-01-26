@@ -179,37 +179,37 @@ void doprocessing (int sock) {
   
   /* Check the pos in shared mem against sockfd */
   sleep(1);
-  printf( "sock:%d == %d:mem\n", sock, array[0] );
+  //printf( "sock:%d == %d:mem\n", sock, array[0] );
   if ( array[0] == sock ) {
     //printf( "debugging\n" );
   
     sleep(1); //GO TO SLEEP and wait for read to happen first    
     //int p = write(sock, "go", sizeof("go"));
-    printf("bout to set color\n");
+    //printf("bout to set color\n");
     write_mssg->top_card.color = array[1];
-    printf("bout to set value\n");
+    //printf("bout to set value\n");
     write_mssg->top_card.value = array[2];
     //write_mssg->top_card.reverse = array[3];
-    printf( "bout to set go\n");
+    //printf( "bout to set go\n");
     if ( array[1] == 100 ) 
       strcpy(write_mssg->mssg, "END");
     else 
       strcpy(write_mssg->mssg, "go");
-    printf( "mssg inside s %s\n", write_mssg->mssg );
-    printf("bout to write\n");
+    //printf( "mssg inside s %s\n", write_mssg->mssg );
+    //printf("bout to write\n");
     int x = write(sock, write_mssg, sizeof(init));
     if ( array[1] == 100){
       printf("Found winner. Disconnecting...\n");
       exit(1);
     }
     shmdt( (void *)array );
-    printf("i wrote\n");
+    //printf("i wrote\n");
     if (x < 0) {
       perror("ERROR writing topcard ");
       printf("error: %s \n", strerror(errno));
       exit(1);
     }
-    printf( "sent topcard\n");
+    //printf( "sent topcard\n");
     /*
     if (p < 0) {
       perror("ERROR writing");

@@ -27,16 +27,4 @@ Any Wilds - Does not work [AMENDED]1/25
 Instead of asking the player for color (we tried to do that but encountered seg fault) only able to put
 down the wild. Cannot choose color. Instead next player is able to put down any color.
 
-Reverse - Does not work
-We used shared memory to implement reverse. Inside shared mem is an array of ints and index 3 holds a odd or 
-even number (1 or 2). Alternate between the 2 numbers when reverse is played to switch directions. Seg fault
-(we believe it might be server issue) when trying to do so. 
-
 Server and clients do not exit when a player wins, only the winner exits.
-We set the array[1] inside shared memory to be 100. This is the callsign for clients to exit. Inside each
-client there is a check for whether or not color is equal to 100. If it is exit. Unfortunately only winner
-exits
-
-
-
-

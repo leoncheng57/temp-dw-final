@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 
   p = generate_hand(p);
   int evod;
-  printf("p.num_cards: %d\n", p.num_cards);
+  //printf("p.num_cards: %d\n", p.num_cards);
   //player_action(p);
   
   signal(SIGINT, sighandler);
@@ -91,22 +91,22 @@ int main(int argc, char *argv[]) {
     }
     char *color = stringify_color( read_mssg->top_card );
     if ( read_mssg->top_card.value == 20 )
-      printf( "Current card played: %s Any value\n", color);
+      printf( "Last card played: %s Any value\n", color);
     else if ( read_mssg->top_card.value == 10)
-      printf( "Current card played: %s Skip\n", color);
+      printf( "Last card played: %s Skip\n", color);
     else if ( read_mssg->top_card.value == 11 ) {
-      printf( "Current card played: %s Reverse\n", color);
+      printf( "Last card played: %s Reverse\n", color);
       //read_mssg->top_card.reverse = evod;
     }
     else if ( read_mssg->top_card.value == 12 ) {
-      printf( "Current card played: %s Draw 2\n", color);
+      printf( "Last card played: %s Draw 2\n", color);
       printf("A player has made you draw 2!\n"); 
       int i=0;
       for (i; i<2; i++) {
         p.cards[p.num_cards] = draw_card();
         p.num_cards++;
       }
-      printf("p.num_cards: %d\n", p.num_cards);
+      //printf("p.num_cards: %d\n", p.num_cards);
       for ( i = 0; i < p.num_cards; i++ ) {
         //if ( p.cards[i].color == 0 )
         printf("%d - play %s %s\n", i, stringify_color(p.cards[i]), stringify_value(p.cards[i]));
@@ -145,7 +145,7 @@ int main(int argc, char *argv[]) {
       break;
     }
     */
-    printf( "mssg: %s\n", read_mssg->mssg );
+    //printf( "mssg: %s\n", read_mssg->mssg );
     if ( !strcmp( read_mssg->mssg, "terminate" ))
       break;
     else if ( !strcmp( read_mssg->mssg, "END"))
@@ -156,7 +156,7 @@ int main(int argc, char *argv[]) {
     //read_mssg->mssg = "go";
     else if ( !strcmp(read_mssg->mssg, "go") ) {
       bzero(buffer,256);
-      printf("Please enter the message: ");
+      printf("Pick a card (choose the card index): ");
       fgets(buffer,255,stdin);
 
       char * scard1;
@@ -164,7 +164,10 @@ int main(int argc, char *argv[]) {
       int num = atoi(buffer);
       //printf( "debugging\n");
       if (num>=p.num_cards){
-        printf( "Draw a card!\n");
+        if (num>p.num_cards){
+	  printf( "Invalid Card!\n");
+	}
+	printf( "Draw a card!\n");
         card *write_card = (card*)malloc(sizeof(card));
         //printf( "debugging\n");
 	      p.cards[p.num_cards] = draw_card();
@@ -275,7 +278,8 @@ int main(int argc, char *argv[]) {
       	}
       	printf("tried to stringify a card in client: %s %s\n", scard2, scard1);
       }
-
+      printf("\n\n");
+      
       /* Send message to the server */
       //printf("five (w)\n");
       //n = write(sockfd, buffer, strlen(buffer));
@@ -286,7 +290,7 @@ int main(int argc, char *argv[]) {
       exit(1);
     }
       sleep(1);
-      printf( "scard2 %s\n", scard2 );
+      //printf( "scard2 %s\n", scard2 );
       //n = write(sockfd, scard2, strlen(scard2));
     }  
     if (n < 0) {

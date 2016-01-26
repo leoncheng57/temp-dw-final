@@ -162,12 +162,12 @@ void player_action(player p) {
   printf("It's your turn! What would you like to do?\n");
   printf("Options:\n");
   int i;
-  printf("p.num_cards: %d\n", p.num_cards);
+  //printf("p.num_cards: %d\n", p.num_cards);
   for ( i = 0; i < p.num_cards; i++ ) {
     //if ( p.cards[i].color == 0 )
-    printf("%d - play %s %s\n", i, stringify_color(p.cards[i]), stringify_value(p.cards[i]));
+    printf("%d - Play %s %s\n", i, stringify_color(p.cards[i]), stringify_value(p.cards[i]));
   }
-  printf("%d - draw a card\n", i++);
+  printf("%d - Draw a card\n", i++);
 
   /*
   //get player input as an int
@@ -213,7 +213,7 @@ void player_action(player p) {
 
 
 player generate_hand(player p){
-  for (p.num_cards = 0; p.num_cards<1; p.num_cards++){
+  for (p.num_cards = 0; p.num_cards<7; p.num_cards++){ //7 cards
     p.cards[p.num_cards] = draw_card();
     //printf("p.cards[p.num_cards].value: %d \n", p.cards[p.num_cards].value);
     //printf("p.cards[p.num_cards].color: %d \n", p.cards[p.num_cards].color);
