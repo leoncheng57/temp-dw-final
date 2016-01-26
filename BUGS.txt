@@ -1,10 +1,42 @@
 BUGS
+Client could only connect to the server once. [FIXED]A few weeks ago?
 
-If the number of clients connecting is greater than (and not equal to) the desired number, then those extra clients will freeze (they will not exit themselves)
+Could not implement turns. Attempted to use Child PIDs and SOCKFDs to determine turns. [FIXED]1/17
+Used shared memory instead to determine turns
 
-Drawing a card does not work.
 
-The action cards (draw2, wild, reverse, skip) may not work properly.
-They work usually but may occasionally not produce the desired effect.
+Unable to send last card played [FIXED]1/25
+Tried to write and read multiple times. Realized we could just send a struct.
+
+If the number of clients connecting is greater than (and not equal to) the desired number, then those extra 
+clients will freeze (they will not exit themselves)
+
+Drawing a card does not work. [FIXED]1/25
+
+The action cards (draw2, wild, reverse, skip) do not work as intended.
+
+Draw 2 - Does not work [AMENDED]1/24 
+Draws 2 for the player but does not carry on to the next player if the current player has a draw 2
+or draw 4. 
+
+Draw 4 - Does not work [AMENDED]1/24
+Draws 4 for the player but does not carry on to the next player if the current player has a draw 2
+or draw 4. 
+
+Any Wilds - Does not work [AMENDED]1/25
+Instead of asking the player for color (we tried to do that but encountered seg fault) only able to put
+down the wild. Cannot choose color. Instead next player is able to put down any color.
+
+Reverse - Does not work
+We used shared memory to implement reverse. Inside shared mem is an array of ints and index 3 holds a odd or 
+even number (1 or 2). Alternate between the 2 numbers when reverse is played to switch directions. Seg fault
+(we believe it might be server issue) when trying to do so. 
 
 Server and clients do not exit when a player wins, only the winner exits.
+We set the array[1] inside shared memory to be 100. This is the callsign for clients to exit. Inside each
+client there is a check for whether or not color is equal to 100. If it is exit. Unfortunately only winner
+exits
+
+
+
+
