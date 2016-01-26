@@ -10,6 +10,7 @@ typedef struct
 {
   int color; //0-red, 1-blue, 2-green, 3-yellow
   int value; //10-skip, 11-reverse, 12-plus two, 13-wild, 14-wild four
+  //int reverse;
 } card;
 
 typedef struct
@@ -64,9 +65,16 @@ card draw_card() {
   close(fd1);
 
   num = abs(num);
-  
-  new_card.color = num % 4;//[0,3]
-  new_card.value = num % 15;//[0,14]
+  new_card.value = num % 15; 
+  if ( new_card.value == 14) {
+    new_card.color = 20;
+  }
+  else if ( new_card.value == 13 ) {
+    new_card.color = 20; 
+  }
+  else {
+    new_card.color = num % 4;//[0,3]
+  }
   return new_card;
 }
 
@@ -202,7 +210,7 @@ void player_action(player p) {
 
 
 player generate_hand(player p){
-  for (p.num_cards = 0; p.num_cards<7; p.num_cards++){
+  for (p.num_cards = 0; p.num_cards<1; p.num_cards++){
     p.cards[p.num_cards] = draw_card();
     //printf("p.cards[p.num_cards].value: %d \n", p.cards[p.num_cards].value);
     //printf("p.cards[p.num_cards].color: %d \n", p.cards[p.num_cards].color);

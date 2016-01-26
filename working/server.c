@@ -82,6 +82,42 @@ void incre_pos() {
   //fgets(input, 256, stdin);
   
   /* Change the int in the shared memory */
+  // We use even and odd values for reverse so this code reverses
+  /*if ( array[3] == 1) {
+    if ( array[0] > desired_total - 3  )
+    // 10 is the value for skip so this code below skips
+    if ( array[2] == 10) {
+      array[0] = array[0] - 1;
+      if ( array[0] > desired_total - 3 )
+        array[0] = array[0] - 1;
+      else
+        array[0] = desired_total - 3;
+    }
+    // otherwise don't skip
+    else 
+      array[0] = array[0] - 1;  
+  else 
+    array[0] = desired_total + 3;
+  }
+  else {
+  */
+  if ( array[0] < desired_total + 3  ) {
+    // 10 is the value for skip so this code below skips
+    if ( array[2] == 10) {
+      array[0] = array[0] + 1;
+      if ( array[0] < desired_total + 3 )
+        array[0] = array[0] + 1;
+      else
+        array[0] = 4;
+    }
+    // otherwise don't skip
+    else 
+      array[0] = array[0] + 1;
+  }
+  else 
+    array[0] = 4;
+  
+  /*
   if ( array[0] < desired_total + 3  )
     // 10 is the value for skip so this code below skips
     if ( array[2] == 10) {
@@ -96,7 +132,7 @@ void incre_pos() {
       array[0] = array[0] + 1;  
   else 
     array[0] = 4;
-  
+  */
   /* Detach the shared memory*/
   //printf("Your new pos in the shared memory is: %d\n", *current_pos);
   shmdt( (void *)array );
@@ -153,6 +189,7 @@ void doprocessing (int sock) {
     write_mssg->top_card.color = array[1];
     printf("bout to set value\n");
     write_mssg->top_card.value = array[2];
+    //write_mssg->top_card.reverse = array[3];
     printf( "bout to set go\n");
     if ( array[1] == 100 ) 
       strcpy(write_mssg->mssg, "END");
@@ -163,7 +200,7 @@ void doprocessing (int sock) {
     int x = write(sock, write_mssg, sizeof(init));
     if ( array[1] == 100){
       printf("Found winner. Disconnecting...\n");
-      exit(0);
+      exit(1);
     }
     shmdt( (void *)array );
     printf("i wrote\n");
@@ -209,6 +246,7 @@ void doprocessing (int sock) {
     if (read_card->color <= 20 || read_card->color == 100 ){
       array[1] = read_card->color;
       array[2] = read_card->value;
+      //array[3] = read_card->reverse;
       
     //Need to turn buffer and buffer3 into ints
     /*************************************************************
@@ -293,6 +331,7 @@ int main( int argc, char *argv[] ) {
   array[0] = 4;
   array[1] = 20; //any color
   array[2] = 20; //any value
+  //array[3] = 2; //Currently no reverse;
   printf( "<server> Set int to %d\n", array[0] );
       
   //printf( "CREATE SEMAPHORE\n\n" );
@@ -380,8 +419,13 @@ int main( int argc, char *argv[] ) {
       /* 	  exit(1); */
       /* 	} */
       /* } */
-
-      if (pid == 0) {
+      if ( pid > 0) {
+        if ( array[1] == 100 ) {
+          printf("[Parent]Exit. Winner found\n");
+          exit(0);
+        }
+      }
+      else if (pid == 0) {
 	
 	while( 1 ) {		
 	  /* This is the client process */

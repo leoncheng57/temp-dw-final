@@ -23,6 +23,7 @@ static void sighandler(int signo) {
 int main(int argc, char *argv[]) {
 
   p = generate_hand(p);
+  int evod;
   printf("p.num_cards: %d\n", p.num_cards);
   //player_action(p);
   
@@ -93,8 +94,10 @@ int main(int argc, char *argv[]) {
       printf( "Current card played: [COLOR] %s [VALUE] any value\n", color);
     else if ( read_mssg->top_card.value == 10)
       printf( "Current card played: [COLOR] %s [VALUE] skip\n", color);
-    else if ( read_mssg->top_card.value == 11 )
+    else if ( read_mssg->top_card.value == 11 ) {
       printf( "Current card played: [COLOR] %s [VALUE] reverse\n", color);
+      //read_mssg->top_card.reverse = evod;
+    }
     else if ( read_mssg->top_card.value == 12 ) {
       printf( "Current card played: [COLOR] %s [VALUE] draw 2\n", color);
       printf("A player has made you draw 2!\n"); 
@@ -119,11 +122,13 @@ int main(int argc, char *argv[]) {
         p.cards[p.num_cards] = draw_card();
         p.num_cards++;
       }
+      /*
       printf("p.num_cards: %d\n", p.num_cards);
       for ( i = 0; i < p.num_cards; i++ ) {
         //if ( p.cards[i].color == 0 )
         printf("%d - play %s %s\n", i, stringify_color(p.cards[i]), stringify_value(p.cards[i]));
       }
+      */ 
     }
     else 
       printf( "Current card played: [COLOR] %s [VALUE] %d\n", color, read_mssg->top_card.value);
@@ -145,6 +150,8 @@ int main(int argc, char *argv[]) {
       break;
     else if ( !strcmp( read_mssg->mssg, "END"))
       printf("Game over! Someone won.\n");
+    else if ( read_mssg->top_card.color == 100 )
+      printf( "Game over! Someone won.\n" );
     //if ( !strcmp(buffer2, "go") ) {
     //read_mssg->mssg = "go";
     else if ( !strcmp(read_mssg->mssg, "go") ) {
@@ -181,6 +188,7 @@ int main(int argc, char *argv[]) {
       	card c = p.cards[num];
       	card *write_card;
       	*write_card = c;
+      	printf( "debug\n" );
       	int value = c.value;
       	int color = c.color;
       	char svalue[100];
@@ -204,6 +212,16 @@ int main(int argc, char *argv[]) {
       	    exit(0);
       	  }
       	  printf("Successfully placed card!\n");
+      	  // Reverse cards SEG FAULT
+      	  /*
+      	  if ( value == 11 ) {
+      	    printf( "You placed reverse card\n" );
+      	    if (evod == 2)
+      	      write_card->reverse = 1;
+      	    else
+      	      write_card->reverse = 2;
+      	  }
+      	  */
       	  /* WILD CARD ERRORS SEG FAULT
       	  if ( value == 13 || value == 14 ) {
       	    printf( "What color do you want?\n");
