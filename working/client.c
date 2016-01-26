@@ -89,10 +89,18 @@ int main(int argc, char *argv[]) {
       exit(1);
     }
     char *color = stringify_color( read_mssg->top_card );
-    if ( read_mssg->top_card.value != 20 )
-      printf( "Current card played: [COLOR] %s [VALUE] %d\n", color, read_mssg->top_card.value);
-    else 
+    if ( read_mssg->top_card.value == 20 )
       printf( "Current card played: [COLOR] %s [VALUE] any value\n", color);
+    else if ( read_mssg->top_card.value == 11 )
+      printf( "Current card played: [COLOR] %s [VALUE] reverse\n", color);
+    else if ( read_mssg->top_card.value == 12 )
+      printf( "Current card played: [COLOR] %s [VALUE] draw 2\n", color);
+    else if ( read_mssg->top_card.value == 13 )
+      printf( "Current card played: [COLOR] %s [VALUE] wildcard\n", color);
+    else if ( read_mssg->top_card.value == 14 )
+      printf( "Current card played: [COLOR] %s [VALUE] wildcard draw 4\n", color);
+    else 
+      printf( "Current card played: [COLOR] %s [VALUE] %d\n", color, read_mssg->top_card.value);
     //printf ( "debug\n" );
     /*printf("able to get pass four\n");
     if (a < 0) {
