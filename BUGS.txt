@@ -7,4 +7,4 @@ Drawing a card does not work.
 The action cards (draw2, wild, reverse, skip) may not work properly.
 They work usually but may occasionally not produce the desired effect.
 
-typing "uno" when player has one card not implemented.
+Server and clients do not exit when a player wins, only the winner exits.

@@ -11,8 +11,7 @@ We aim to recreate the card game Uno, mainly working in the terminal. There can 
 Some simple rules:
    1. If the previous card is a number card, your card may either be the same color or value. You may also choose to draw a card.
    2. If the previous card is an action card (ie Draw 2, Wild Card, Wild Draw 4, Skip, Reverse), then we will check for combos and apply the correct action
-   3. When a player has one card left, he/she must type "uno" first or draw 2 cards.
-   4. First player to discard all cards wins.
+   3. First player to discard all cards wins.
 
 HOW TO USE:
 A description as to how the project will be used (describe the user interface).
